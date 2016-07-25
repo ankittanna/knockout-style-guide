@@ -63,7 +63,6 @@ This makes unit testing easy.
     
       ```javascript
   define(['knockout'], function(ko) {
-        // Using money binding handler for SomeView.html
         var toMoney = function(num){
                 return '$' + (num.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') );
             };
