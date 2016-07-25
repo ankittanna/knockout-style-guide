@@ -60,8 +60,9 @@ This makes unit testing easy.
     
 ### Style 1
     *Not Recommended*
-    ```javascript
-    define(['knockout'], function(ko) {
+    
+      ```javascript
+  define(['knockout'], function(ko) {
         // Using money binding handler for SomeView.html
         var toMoney = function(num){
                 return '$' + (num.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') );
@@ -90,6 +91,9 @@ This makes unit testing easy.
         
         return SampleViewModel;
     });
+  
+  ```
+    ```javascript
     ```
     
         *Recommended*
