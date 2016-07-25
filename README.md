@@ -39,6 +39,93 @@ In the diagram, we have seen the following role players:
 
 ## Single Responsibility
 
-## Single Responsibility
+Every ViewModel will focus on very few things. Functions will be smaller and dedicated to do one and only one task. Every ViewModel should be written in its own JavaScript file. The build process can be configured to concatinate and minify them. Hence we have to implement the Model-View-View-Model pattern using the Knockoutjs framework to clearly separate the logic that drives the workings of UI from the logic that provides the data/behavior for the UI.
 
-### Rule of 1
+This promotes reusability as well as modularity. Smaller files are focused files and do not get impacted by the bugs else where.
+This will also enable you to have lose coupling between your modules.
+This makes unit testing easy.
+
+*Rules:*
+    1. One Component per file
+    2. Less than 500 lines per file
+    3. Readable, maintainable and avoids conflicts in source control
+    4. Decouples tasks
+    5. For a single Knockout Component, we can break it into: 
+        - View (html)
+        - ViewModel (JavaScript)
+        - Service (JavaScript)
+        - Domain Models (JSON Objects) - Interfate to View Model
+        - Models (JSON Objects) - Structure of Various objects
+        - Styles (CSS)
+    
+### Style 1
+    /* Not Recommended */
+    ```javascript
+    define(['knockout'], function(ko) {
+        // Using money binding handler for SomeView.html
+        var toMoney = function(num){
+                return '$' + (num.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') );
+            };
+        
+            ko.bindingHandlers.money = {
+                update: function(element, valueAccessor, allBindings){
+                        var $el = $(element);
+                        var method;
+
+                        // Gives us the real value if it is a computed observable or not
+                        var valueUnwrapped = ko.unwrap( valueAccessor() );
+
+                        if($el.is(':input')){
+                            method = 'val';
+                        } else {
+                            method = 'text';
+                        }
+                        return $el[method]( toMoney( valueUnwrapped ) );
+                    }
+            };
+        
+        function SampleViewModel() {
+            // ... Some tasks here
+        }
+        
+        return SampleViewModel;
+    });
+    ```
+    *Recommended*
+    This can be broken into 2 separate files:
+    *some-view-model.js*
+    ```javascript
+    define(['knockout'], function(ko) { 
+        function SampleViewModel() {
+            // ... Some tasks here
+        }
+        
+        return SampleViewModel;
+    });
+    ```
+    
+    *money-binding.js*
+    ```javascript
+        define(['knockout'], function(ko) {
+            var toMoney = function(num){
+                return '$' + (num.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') );
+            };
+        
+            ko.bindingHandlers.money = {
+                update: function(element, valueAccessor, allBindings){
+                        var $el = $(element);
+                        var method;
+
+                        // Gives us the real value if it is a computed observable or not
+                        var valueUnwrapped = ko.unwrap( valueAccessor() );
+
+                        if($el.is(':input')){
+                            method = 'val';
+                        } else {
+                            method = 'text';
+                        }
+                        return $el[method]( toMoney( valueUnwrapped ) );
+                    }
+            };
+        }
+    ```
