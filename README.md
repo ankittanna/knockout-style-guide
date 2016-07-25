@@ -15,3 +15,20 @@ You will never learn alone from your own business scenarios. Go to [StackOverflo
 ##Guide
 All we need to know is where to use which feature and how it would be useful to us. Once we know this then we would be able to fit the leggo bricks of a giant structure very easily.
 
+##Before you proceed
+I'd like you to have a look at this beautifully crafted answer on StackOverflow about [MVC vs MVVM](//stackoverflow.com/questions/667781/what-is-the-difference-between-mvc-and-mvvm) which explains a minute difference about frameworks like AngularJS and KnockoutJS
+
+It states that "in MVVM, controllers will typically contain all processing logic and decide what data to display in which views using which view models." If you're wondering where did "C"ontroller came from, this means your data mappers which process the raw JSON coming from server and shape it into logical/meaningful grouping of data. Controllers listen for, and publish, events. Controllers provide the logic that controls what data is seen and where. Controllers provide the command code to the ViewModel so that the ViewModel is actually reusable.
+
+So basically, this is what diagramattically happens in a large Knockout Application:
+[![MVVM Knockout Application Flow](https://raw.githubusercontent.com/ankittanna/knockout-style-guide/master/Slide1.PNG)]
+
+The diagram is self explanatory. 
+
+## Table of Contents
+    1. [Single Responsibility](#single-responsibility)
+
+## Single Responsibility
+
+### Rule 1
+KO's Single Responsibility Principle
