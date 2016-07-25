@@ -26,9 +26,11 @@ So basically, this is what diagramattically happens in a large Knockout Applicat
 The diagram is self explanatory. 
 
 ## Table of Contents
-    1. [Single Responsibility](#single-responsibility)
+
+  1. [Single Responsibility](#single-responsibility)
 
 ## Single Responsibility
 
-### Rule 1
-KO's Single Responsibility Principle
+## Single Responsibility
+
+### Rule of 1
