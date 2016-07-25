@@ -60,7 +60,7 @@ This makes unit testing easy.
     
 ### Style 1 
 # Not Recommended
-    ```javascript
+    ```
   
     define(['knockout'], function(ko) {
             
@@ -97,7 +97,7 @@ This makes unit testing easy.
   
         This can be broken into 2 separate files:
         *some-view-model.js*
-        ```javascript
+        ```
             define(['knockout'], function(ko) { 
                 function SampleViewModel() {
                     Some tasks here
@@ -107,7 +107,7 @@ This makes unit testing easy.
             });
         ```   
         *money-binding.js*
-        ```javascript
+        ```
             define(['knockout'], function(ko) {
                 var toMoney = function(num){
                     return '$' + (num.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') );
