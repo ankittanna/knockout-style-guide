@@ -25,6 +25,14 @@ So basically, this is what diagramattically happens in a large Knockout Applicat
 
 The diagram is self explanatory. 
 
+In the diagram, we have seen the following role players:
+    1. Information holder – an object designed to know certain information and provide that information to other objects.
+    2. Structurer – an object that maintains relationships between objects and information about those relationships.
+    3. Service provider – an object that performs specific work and offers services to others on demand.
+    4. Controller – an object designed to make decisions and control a complex task.
+    5. Coordinator – an object that doesn’t make many decisions but, in a rote or mechanical way, delegates work to other objects.
+    6. Interfacer – an object that transforms information or requests between distinct parts of a system.
+
 ## Table of Contents
 
   1. [Single Responsibility](#single-responsibility)
