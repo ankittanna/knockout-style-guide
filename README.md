@@ -92,7 +92,8 @@ This makes unit testing easy.
     });
   
   ```
-  #Recommended
+  
+# Recommended
   
         This can be broken into 2 separate files:
         *some-view-model.js*
@@ -104,7 +105,7 @@ This makes unit testing easy.
 
                 return SampleViewModel;
             });
-        ```
+        ```   
         *money-binding.js*
         ```javascript
             define(['knockout'], function(ko) {
