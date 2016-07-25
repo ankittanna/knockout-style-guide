@@ -58,10 +58,9 @@ This makes unit testing easy.
         - Models (JSON Objects) - Structure of Various objects
         - Styles (CSS)
     
-### Style 1
-    *Not Recommended*
-    
-      ```javascript
+### Style 1 
+# Not Recommended
+    ```javascript
   
     define(['knockout'], function(ko) {
             
@@ -93,44 +92,41 @@ This makes unit testing easy.
     });
   
   ```
-    ```javascript
-    ```
-    
-        *Recommended*
-    This can be broken into 2 separate files:
-    *some-view-model.js*
-    ```javascript
-    define(['knockout'], function(ko) { 
-        function SampleViewModel() {
-            // ... Some tasks here
-        }
-        
-        return SampleViewModel;
-    });
-    ```
-    
-    *money-binding.js*
-    ```javascript
-        define(['knockout'], function(ko) {
-            var toMoney = function(num){
-                return '$' + (num.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') );
-            };
-        
-            ko.bindingHandlers.money = {
-                update: function(element, valueAccessor, allBindings){
-                        var $el = $(element);
-                        var method;
+  #Recommended
+  
+        This can be broken into 2 separate files:
+        *some-view-model.js*
+        ```javascript
+            define(['knockout'], function(ko) { 
+                function SampleViewModel() {
+                    Some tasks here
+                }
 
-                        // Gives us the real value if it is a computed observable or not
-                        var valueUnwrapped = ko.unwrap( valueAccessor() );
+                return SampleViewModel;
+            });
+        ```
+        *money-binding.js*
+        ```javascript
+            define(['knockout'], function(ko) {
+                var toMoney = function(num){
+                    return '$' + (num.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') );
+                };
 
-                        if($el.is(':input')){
-                            method = 'val';
-                        } else {
-                            method = 'text';
+                ko.bindingHandlers.money = {
+                    update: function(element, valueAccessor, allBindings){
+                            var $el = $(element);
+                            var method;
+
+                            // Gives us the real value if it is a computed observable or not
+                            var valueUnwrapped = ko.unwrap( valueAccessor() );
+
+                            if($el.is(':input')){
+                                method = 'val';
+                            } else {
+                                method = 'text';
+                            }
+                            return $el[method]( toMoney( valueUnwrapped ) );
                         }
-                        return $el[method]( toMoney( valueUnwrapped ) );
-                    }
-            };
-        }
-    ```
+                };
+            }
+        ```
