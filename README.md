@@ -63,10 +63,6 @@ This makes unit testing easy.
     
       ```javascript
   define(['knockout'], function(ko) {
-        var toMoney = function(num){
-                return '$' + (num.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') );
-            };
-        
             ko.bindingHandlers.money = {
                 update: function(element, valueAccessor, allBindings){
                         var $el = $(element);
