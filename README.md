@@ -21,7 +21,7 @@ I'd like you to have a look at this beautifully crafted answer on StackOverflow 
 It states that "in MVVM, controllers will typically contain all processing logic and decide what data to display in which views using which view models." If you're wondering where did "C"ontroller came from, this means your data mappers which process the raw JSON coming from server and shape it into logical/meaningful grouping of data. Controllers listen for, and publish, events. Controllers provide the logic that controls what data is seen and where. Controllers provide the command code to the ViewModel so that the ViewModel is actually reusable.
 
 So basically, this is what diagramattically happens in a large Knockout Application:
-[![MVVM Knockout Application Flow](https://raw.githubusercontent.com/ankittanna/knockout-style-guide/master/Slide1.PNG)]
+![MVVM Knockout Application Flow](https://raw.githubusercontent.com/ankittanna/knockout-style-guide/master/Slide1.PNG)
 
 The diagram is self explanatory. 
 
