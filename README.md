@@ -59,7 +59,7 @@ This makes unit testing easy.
         - Styles (CSS)
     
 ### Style 1
-    /* Not Recommended */
+    * Not Recommended *
     ```javascript
     define(['knockout'], function(ko) {
         // Using money binding handler for SomeView.html
