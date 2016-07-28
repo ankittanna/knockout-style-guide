@@ -165,7 +165,7 @@ ObjectName.prototype = {
 
 ```
 
-* Example *
+*Example*
 
 ```javascript
 var Car = function(type) {
@@ -210,7 +210,7 @@ var Module = function() {
 }
 ```
 
-* Example *
+*Example*
 
 ```javascript
 var Car = function(speed, type) {
@@ -259,7 +259,7 @@ var Module = (function () {
 }());
 ```
 
-* Example *
+*Example*
 
 ```javascript
 var car = (function(speed, type) {
