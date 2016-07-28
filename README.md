@@ -36,6 +36,7 @@ In the diagram, we have seen the following role players:
 ## Table of Contents
 
   1. [Single Responsibility](#single-responsibility)
+  2. [Modules and Patterns](#modules-and-patterns)
 
 ## Single Responsibility
 
@@ -130,3 +131,161 @@ var toMoney = function(num){
     };
 }
 ```
+
+### Style 2 - Small Functions
+- Less than 75 lines of code
+- Easy to test
+- Easy to read
+- Easy to maintain
+- Reusable
+- Avoid bugs and SVN collisions
+
+
+## Modules and Patterns
+Use RequireJS Modules or IIFE to create small files - also known as modules. These modules will have a single responsibility which it needs to perform. This responsibility should be exposed through an API of the module. 
+
+Modules help us to implement Separations of Concerns principle and meaningfully and consistently structure our application. Unit testing becomes easier and independent.
+
+There are couple of patterns we can adopt during development.
+1. Prototype Pattern
+2. Module Pattern
+3. Revealing Module Pattern
+
+### Prototype Pattern
+This pattern creates a constructor function and a prototype to it. Each object that is created from the constructor will act as a module and will encapsulate its functionality.
+
+```javascript
+function ObjectName(parameters) {
+   // create instance functionality
+}
+
+ObjectName.prototype = {
+   // create prototype functionality
+};
+
+```
+
+* Example *
+
+```javascript
+var Car = function(type) {
+   this.speed = ko.observable();
+   this.type = type || 'no-type';
+}
+
+Car.prototype = {
+   drive: function(speed) {
+      this.speed(speed);
+   }
+}
+
+var car = new Car('BMW');
+car.drive(60);
+```
+
+#### Pros
+- Uses built in JavaScript Features
+- Functions and variables are not part of global scope
+- Loaded into memory only once
+
+#### Cons
+- this keyword handling
+- Separate definition of function and prototype
+
+
+### Module Pattern
+This pattern is one of the most common patterns used from the four pattern. This is based on exposing the set of functionalities of module through an APIs.
+
+This pattern is used when we do not want to expose the private members of the module. 
+
+
+```javascript
+var Module = function() {
+   // private variables
+   // private funtions
+   
+   return {
+      public variables and functions
+   }
+}
+```
+
+* Example *
+
+```javascript
+var Car = function(speed, type) {
+   // private variables	
+	var speed = ko.observable(speed);
+	var type = ko.observable(type || "No type");		
+
+	// private functions
+ 	var printSpeed = ko.computed(function() {
+      console.log(speed());
+ 	});
+
+	return {
+       // public members and functions
+		drive: printSpeed
+	};
+}
+
+// Later in code
+var car = new Car("bmw");
+car.drive(60);
+```
+
+#### Pros
+- Does not expose private functionality of the ViewModel
+- Exposes only selective amount to the View
+- View-ViewModel have a cleaner and fixed set of attributes available
+
+#### Cons
+- Testing Private functionality is difficult
+- View and view model need to be in Sync
+- Function and variables are in memory
+- Debugging becomes difficult
+
+
+### Revealing Module Pattern
+The revealing module pattern is very close to the module pattern by its implementation but the only difference between them is that you create a singleton module. In order to do that you declare the module and wrap it inside an IIFE.
+
+```javascript
+var Module = (function () {
+   // private variables
+   // private functions
+     return {
+     // public members and functions
+     };
+}());
+```
+
+* Example *
+
+```javascript
+var car = (function(speed, type) {
+   // private variables	
+	var speed = ko.observable(speed);
+	var type = ko.observable(type || "No type");	
+
+	// private functions
+ 	var printSpeed = ko.computed(function() {
+      console.log(speed());
+ 	});
+
+		return {
+       // public members and functions
+		drive: printSpeed
+        }
+}(20, "bmw"));
+
+// Later in code
+car.drive(60);
+```
+
+#### Pros
+- It is a cleaner way to expose the public interface.
+- You have only a single instance of the module.
+
+#### Cons
+- Ability to extend such modules is difficult
+- They have to be extended through external files/dependencies else they have to be self contained
