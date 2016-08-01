@@ -37,6 +37,7 @@ In the diagram, we have seen the following role players:
 
   1. [Single Responsibility](#single-responsibility)
   2. [Modules and Patterns](#modules-and-patterns)
+  3. [Utility Methods](#utility-methods)
 
 ## Single Responsibility
 
@@ -140,6 +141,50 @@ var toMoney = function(num){
 - Reusable
 - Avoid bugs and SVN collisions
 
+### Style 3 - IIFE or RequireJS modules
+Using IIFE methods or RequireJS module helps. Wrapping the components in IIFE or RequireJS modules help you have the code covered in a particular scope. They remove variable from global scope. RequireJS helps in implementing AMD. This will define variable scope for each module. Also when we club these files together, collisions of variables would be avoided.
+
+```javascript
+(function(ko) {
+ko.bindingHandlers.money = {
+   update: function(element, valueAccessor, allBindings){
+     var $el = $(element);
+        var method;
+
+                // Gives us the real value if it is a computed observable or not
+                var valueUnwrapped = ko.unwrap( valueAccessor() );
+
+                if($el.is(':input')){
+                   method = 'val';
+                } else {
+                   method = 'text';
+                }
+                return $el[method]( toMoney( valueUnwrapped ) );
+            }
+    };
+})(knockout);
+
+///////////////////////////// OR /////////////////////////////
+
+define(['knockout', function(ko) {
+ko.bindingHandlers.money = {
+   update: function(element, valueAccessor, allBindings){
+     var $el = $(element);
+        var method;
+
+                // Gives us the real value if it is a computed observable or not
+                var valueUnwrapped = ko.unwrap( valueAccessor() );
+
+                if($el.is(':input')){
+                   method = 'val';
+                } else {
+                   method = 'text';
+                }
+                return $el[method]( toMoney( valueUnwrapped ) );
+            }
+    };
+}]);
+```
 
 ## Modules and Patterns
 Use RequireJS Modules or IIFE to create small files - also known as modules. These modules will have a single responsibility which it needs to perform. This responsibility should be exposed through an API of the module. 
@@ -289,3 +334,20 @@ car.drive(60);
 #### Cons
 - Ability to extend such modules is difficult
 - They have to be extended through external files/dependencies else they have to be self contained
+
+
+## Utility Methods
+
+It's not at all mandatory to use utility methods of KnockoutJS. And I recommend not to use them. Since we are already using AMD, we can load lodash/underscore library and they have numerous number of complex functionalities that we cant even think of. 
+
+The reason we are pushing for not using this is Knockout is a bit old. The set of complexities demanded on front end have shooted up. And hence, lodash/underscore comes in handy.
+For reference, all of the Knockout's utility functions are available in lodash/underscore.
+
+Another utility library is MomentJS. This library can be used for anything and everything related to date and time. Be it, format, conversion, addition, subtraction, future, current and past operations.
+
+These kind of library help us focus on the business logic and less worry about the smaller stuff.
+
+Best utility libraries recommended to be used with an MVVM framework:
+    1. [Lodash](//lodash.com/)
+    2. [Underscore](//underscorejs.org/)
+    3. [MomentJS](//momentjs.com/)
